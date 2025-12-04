@@ -193,7 +193,7 @@
 <script>
 /* ========== CONFIG ========== */
 /* Replace with your deployed Apps Script web app /exec URL */
-const GAS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyRohoiicWlgY7_MhDCkA55YMa3zksqFI7zFJl4-yuZVXIgnLJ9YrSgkNM7I8bJq4W-BA/exec';
+const GAS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbybRPAd9G4f19o3TcBYbkWQN9rvCAQ4rJgx8hgs-_iWQfrnI545K1qZJ3uhwPG-LAmsVA/exec';
 /* ============================ */
 
 const $ = id => document.getElementById(id);
@@ -531,7 +531,44 @@ document.addEventListener('DOMContentLoaded', async ()=> {
 
   $('company').addEventListener('blur', ()=> loadEmployees($('company').value));
 });
+
+const APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbybRPAd9G4f19o3TcBYbkWQN9rvCAQ4rJgx8hgs-_iWQfrnI545K1qZJ3uhwPG-LAmsVA/exec'; // your exec URL
+
+async function submitToServer(payload) {
+  try {
+    const resp = await fetch(APPSCRIPT_URL, {
+      method: 'POST',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const data = await resp.json();
+    return data;
+  } catch (err) {
+    console.error('submit error', err);
+    throw err;
+  }
+}
+
+// in your submit button handler replace google.script.run...submitAttendance(payload) with:
+$('submitBtn').disabled = true; $('submitBtn').textContent = 'Submitting...';
+submitToServer(payload)
+  .then(res => {
+    $('submitBtn').disabled = false; $('submitBtn').textContent = 'Submit Attendance';
+    if (res && res.status === 'ok') {
+      status('Attendance submitted ✓ ' + (new Date()).toLocaleString(), true);
+      $('note').value = ''; clearThumbnail();
+    } else {
+      status('Error: ' + (res && res.message ? res.message : 'unknown'), false);
+    }
+  })
+  .catch(err => {
+    $('submitBtn').disabled = false; $('submitBtn').textContent = 'Submit Attendance';
+    status('Network error while submitting', false);
+    console.error(err);
+  });
+
 </script>
 </body>
 </html>
-
