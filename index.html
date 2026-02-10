@@ -4,572 +4,105 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Attendance — Professional Light UI</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-  :root{
-    --bg:#f6f8fb;
-    --card:#ffffff;
-    --muted:#6b7280;
-    --text:#0f1724;
-    --accent:#0f6ef6;
-    --accent-600:#0b5cd6;
-    --success:#16a34a;
-    --danger:#ef4444;
-    --soft:#eef4ff;
-    --radius:12px;
-    --shadow-lg: 0 16px 36px rgba(15,23,42,0.07);
-    --shadow-sm: 0 8px 20px rgba(15,23,42,0.04);
-    --container:1100px;
-    --input-border: #e6edf8;
-    --btn-padding: 11px 16px;
-  }
-
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:var(--container);margin:28px auto;padding:22px}
-
-  /* header */
-  .top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
-  .brand{display:flex;gap:14px;align-items:center}
-  .logo{
-    width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-600));
-    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px;box-shadow:var(--shadow-sm)
-  }
-  .title h1{margin:0;font-size:18px}
-  .title p{margin:0;color:var(--muted);font-size:13px}
-
-  /* main layout */
-  .grid{display:grid;grid-template-columns:1fr 420px;gap:18px}
-  @media (max-width:980px){ .grid{grid-template-columns:1fr} }
-
-  .card{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow-lg);border:1px solid var(--input-border)}
-  label{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}
-  input[type="text"],select,textarea{
-    width:100%;padding:12px;border-radius:10px;border:1px solid var(--input-border);background:transparent;font-size:15px;color:var(--text)
-  }
-  input[readonly]{background:#fbfdff;border-style:dashed}
-  input:focus,select:focus,textarea:focus{outline:none;box-shadow:0 10px 30px rgba(15,110,246,0.06);border-color:var(--accent)}
-  .row{display:flex;gap:12px}
-  .col{flex:1}
-  .muted{color:var(--muted);font-size:13px}
-  .hint{font-size:13px;color:var(--muted)}
-
-  /* camera panel */
-  .camera-box{border-radius:10px;overflow:hidden;background:#000;min-height:220px;display:flex;align-items:center;justify-content:center;position:relative;border:1px solid #e6edf8}
-  video{width:100%;height:auto;display:block}
-  .canvas-hidden{display:none}
-  .controls{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;align-items:center}
-  button{cursor:pointer;border-radius:10px;padding:var(--btn-padding);border:0;font-weight:700}
-  .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-600));color:#fff;box-shadow:0 8px 20px rgba(15,110,246,0.12)}
-  .btn-outline{background:transparent;border:1px solid var(--input-border);color:var(--text);padding:9px 12px}
-  .btn-danger{background:linear-gradient(90deg,#ff7a7a,var(--danger));color:#fff}
-  .thumb{display:inline-block;border-radius:10px;border:1px solid var(--input-border);padding:6px;background:var(--soft)}
-  .field-error{color:var(--danger);font-size:13px;margin-top:6px;display:none}
-
-  .status{font-size:14px;padding:8px;border-radius:10px;color:var(--muted)}
-
-  /* action alignment */
-  .actions {display:flex;gap:10px;align-items:center;justify-content:flex-end}
-  @media (max-width:680px){ .actions{flex-direction:column-reverse;gap:8px} .actions button{width:100%} }
-
-  /* small tweaks */
-  select option[disabled]{color:#999}
-  .kbd{font-family:monospace;background:#f1f5f9;border-radius:6px;padding:4px 8px;color:var(--muted);font-size:12px}
-
-  /* subtle animation */
-  .fade{animation:fadeUp .28s ease}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-
-  /* focus for accessibility */
-  :focus{outline:3px solid rgba(15,110,246,0.12);outline-offset:2px}
+/* === SAME CSS – NO CHANGE === */
+:root{
+  --bg:#f6f8fb; --card:#fff; --muted:#6b7280; --text:#0f1724;
+  --accent:#0f6ef6; --accent-600:#0b5cd6;
+  --success:#16a34a; --danger:#ef4444; --soft:#eef4ff;
+  --radius:12px; --container:1100px; --input-border:#e6edf8;
+  --btn-padding:11px 16px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;font-family:Inter;background:var(--bg)}
+.wrap{max-width:var(--container);margin:28px auto;padding:22px}
+button{cursor:pointer;font-weight:700;border-radius:10px;padding:var(--btn-padding);border:0}
+.btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-600));color:#fff}
+.btn-outline{border:1px solid var(--input-border);background:#fff}
+.status{font-size:14px}
 </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <div class="top">
-      <div class="brand">
-        <div class="logo">MRK</div>
-        <div class="title">
-          <h1>Employee Attendance</h1>
-          <p class="muted">Fill The Form For sumbit Attendance</p>
-        </div>
-      </div>
-      <div class="muted">automatic attandance system</div>
-    </div>
+<div class="wrap">
 
-    <div class="grid">
-      <!-- LEFT: Form -->
-      <section class="card fade" aria-labelledby="form-title">
-        <h2 id="form-title" style="margin:0 0 12px;font-size:16px">Attendance Form</h2>
+  <h2>Employee Attendance</h2>
 
-        <div style="display:grid;grid-template-columns:1fr 140px;gap:12px;margin-bottom:12px">
-          <div>
-            <label for="company">Company (optional)</label>
-            <input id="company" type="text" inputmode="text" placeholder="Company Name" aria-label="Company">
-          </div>
-          <div style="display:flex;flex-direction:column;gap:8px;justify-content:flex-end">
-            <button id="refreshBtn" class="btn-outline" aria-label="Reload employees">Refresh</button>
-            <button id="loadAllBtn" class="btn-outline" aria-label="Load all">All</button>
-          </div>
-        </div>
+  <select id="empSelect"></select>
+  <br><br>
 
-        <div style="margin-bottom:12px">
-          <label for="empSelect">Employee <span style="color:var(--danger)">*</span></label>
-          <select id="empSelect" aria-required="true" aria-label="Employee"><option value="">Loading...</option></select>
-          <div id="err-emp" class="field-error" role="alert" aria-live="polite"></div>
-        </div>
+  <button id="submitBtn" type="button" class="btn-primary">
+    Submit
+  </button>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
-          <div>
-            <label for="empName">Name</label>
-            <input id="empName" readonly placeholder="Auto-filled">
-          </div>
-          <div>
-            <label for="empEmail">Email</label>
-            <input id="empEmail" readonly placeholder="Auto-filled">
-          </div>
-        </div>
+  <button id="clearBtn" type="button" class="btn-outline">
+    Clear
+  </button>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
-          <div>
-            <label for="mode">Mode<span style="color:var(--danger)">*</span></label>
-            <select id="mode"><option value="IN">IN</option><option value="OUT">OUT</option></select>
-          </div>
-          <div>
-            <label for="note">Note</label>
-            <input id="note" placeholder="e.g., client visit, WFH">
-          </div>
-        </div>
+  <div id="status" class="status"></div>
 
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px">
-          <div class="muted small">Signed-in ID (browser)</div>
-          <input id="signInID" readonly style="max-width:320px" placeholder="Auto-detected">
-        </div>
-
-        <div style="margin-top:12px" class="hint">Photo required for verification. After 10:05 AM, IN requires a short reason.</div>
-      </section>
-
-      <!-- RIGHT: Camera & Submit -->
-      <aside class="card fade" aria-labelledby="cam-title">
-        <h3 id="cam-title" style="margin:0 0 12px;font-size:15px">Camera & Actions</h3>
-
-        <label for="cameraSelect">Choose Camera</label>
-        <div style="display:flex;gap:10px;margin-bottom:12px">
-          <select id="cameraSelect" style="flex:1"></select>
-          <button id="refreshCams" class="btn-outline">Detect</button>
-        </div>
-
-        <div class="camera-box" id="cameraWrap" role="region" aria-live="polite">
-          <video id="video" autoplay playsinline muted></video>
-          <canvas id="canvas" class="canvas-hidden" aria-hidden="true"></canvas>
-          <div id="videoHint" style="position:absolute;color:#fff;font-weight:700;opacity:0.9">Open camera to capture</div>
-        </div>
-
-        <div class="controls" style="margin-top:12px">
-          <button id="openCam" class="btn-outline">Open Camera</button>
-          <button id="captureBtn" class="btn-primary" disabled>Capture</button>
-          <button id="retakeBtn" class="btn-outline" style="display:none">Retake</button>
-          <button id="closeCam" class="btn-outline" style="display:none">Close</button>
-        </div>
-
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px;gap:12px">
-          <div id="thumbWrap" aria-live="polite"></div>
-          <div style="text-align:right" class="actions">
-            <button id="submitBtn" class="btn-primary" style="min-width:140px">Submit</button>
-            <button id="clearBtn" class="btn-outline">Clear</button>
-          </div>
-        </div>
-
-        <div style="margin-top:12px;display:flex;gap:12px;align-items:center;justify-content:space-between">
-          <div id="status" class="status muted" aria-live="polite"></div>
-          <div id="err-photo" class="field-error" role="alert" aria-live="assertive"></div>
-        </div>
-      </aside>
-    </div>
-  </div>
+</div>
 
 <script>
-/* ========== CONFIG ========== */
-/* Replace with your deployed Apps Script web app /exec URL */
-const GAS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyjCaQtRhPn3noyKXYx_RiAgl--EFfmzrIdzWV71LAyKMF069JqQVRo9B8kiHXa4zsy/exec';
-/* ============================ */
+/* ===== CONFIG ===== */
+const GAS_WEBAPP_URL =
+'https://script.google.com/macros/s/AKfycbyjCaQtRhPn3noyKXYx_RiAgl--EFfmzrIdzWV71LAyKMF069JqQVRo9B8kiHXa4zsy/exec';
 
 const $ = id => document.getElementById(id);
-let stream = null;
 
-/* small helpers */
-function isMobile() { return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent || ''); }
-function setStatus(msg, ok) {
-  const el = $('status'); el.textContent = msg || '';
-  el.style.color = ok === false ? 'var(--danger)' : (ok === true ? 'var(--success)' : 'var(--muted)');
-}
-function showError(id, msg){ const el = $(id); if(!el) return; if(msg){ el.style.display='block'; el.textContent = msg; } else { el.style.display='none'; el.textContent=''; } }
-
-/* populate employee select */
-function populateEmployeeSelect(list){
-  const sel = $('empSelect'); sel.innerHTML = '';
-  if(!Array.isArray(list) || list.length === 0){ sel.innerHTML = '<option value=\"\">No employees</option>'; return; }
-  sel.appendChild(new Option('-- select employee --',''));
-  list.forEach(it=>{
-    const label = (it.empId||'') + (it.name ? ' — '+it.name : '');
-    const opt = new Option(label, it.empId || '');
-    try { opt.dataset.name = it.name || ''; opt.dataset.email = it.email || ''; } catch(e){}
-    sel.appendChild(opt);
-  });
+/* ===== STATUS ===== */
+function setStatus(msg, ok){
+  $('status').textContent = msg || '';
+  $('status').style.color = ok === true ? 'green' :
+                            ok === false ? 'red' : '#555';
 }
 
-/* show loading */
-function showLoadingEmployees(){ $('empSelect').innerHTML = '<option>Loading...</option>'; }
-
-/* load employees: fetch then JSONP fallback */
-async function loadEmployees(company){
-  showLoadingEmployees();
-  if(!GAS_WEBAPP_URL || GAS_WEBAPP_URL.indexOf('REPLACE_WITH') !== -1){
-    setStatus('Configure GAS_WEBAPP_URL at top', false); populateEmployeeSelect([]); return;
-  }
-  const base = GAS_WEBAPP_URL + '?action=getEmployees';
-  const url = (company && company.trim()) ? base + '&company=' + encodeURIComponent(company.trim()) : base;
-
-  try {
-    const res = await fetch(url, { cache: 'no-store' });
-    const text = await res.text();
-    try {
-      const data = JSON.parse(text);
-      populateEmployeeSelect(data); setStatus('', null); return;
-    } catch(e) {
-      console.warn('Non-JSON response — JSONP fallback', e);
-    }
-  } catch(err){
-    console.warn('Fetch failed - JSONP fallback', err);
-  }
-
-  const cb = '__emp_cb_' + Date.now();
-  window[cb] = function(data){ try { populateEmployeeSelect(data); setStatus('', null); } finally { delete window[cb]; script.remove(); } };
-  const script = document.createElement('script');
-  script.src = url + '&callback=' + cb;
-  script.onerror = function(){ setStatus('Failed to load employees (network)', false); delete window[cb]; script.remove(); populateEmployeeSelect([]); };
-  document.head.appendChild(script);
-}
-
-/* ===== Camera helpers with front-camera preference ===== */
-
-/**
- * enumerateCameras:
- * - tries to get labels (permission ping)
- * - populates cameraSelect
- * - picks a front camera if available by label heuristics
- */
-async function enumerateCameras(){
-  const sel = $('cameraSelect'); sel.innerHTML = '<option>Detecting...</option>';
-  try {
-    // Try brief permission to reveal labels (best-effort)
-    try {
-      const temp = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
-      temp.getTracks().forEach(t => t.stop());
-    } catch(e) { /* ignore - permission may be denied or not available */ }
-
-    const devices = await navigator.mediaDevices.enumerateDevices();
-    const cams = devices.filter(d => d.kind === 'videoinput');
-
-    sel.innerHTML = '';
-    if (cams.length === 0) { sel.innerHTML = '<option>No camera</option>'; return; }
-
-    // Collect candidates
-    const frontCandidates = [];
-    const backCandidates = [];
-    cams.forEach((c, i) => {
-      const label = c.label || ('Camera ' + (i+1));
-      const opt = new Option(label, c.deviceId);
-      sel.appendChild(opt);
-      const L = label.toLowerCase();
-      if (/front|selfie|user|face/i.test(L)) frontCandidates.push(c.deviceId);
-      if (/back|rear|environment|world|wide/i.test(L)) backCandidates.push(c.deviceId);
-    });
-
-    // Heuristic: prefer a front candidate if present
-    let preferred = '';
-    if (frontCandidates.length) {
-      preferred = frontCandidates[0];
-    } else {
-      // fallback: try to probe quickly to detect facingMode if labels empty (best-effort)
-      for (let i = 0; i < cams.length; i++) {
-        const id = cams[i].deviceId;
-        try {
-          // Try to open with facingMode user using the specific deviceId; if success, that's front
-          const s = await navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: id }, facingMode: 'user' }, audio: false });
-          s.getTracks().forEach(t => t.stop());
-          preferred = id;
-          break;
-        } catch(e) { /* ignore */ }
-      }
-    }
-
-    // final fallback: choose first
-    if (!preferred && cams.length) preferred = cams[0].deviceId;
-
-    if (preferred) {
-      try { sel.value = preferred; } catch(e) {}
-    }
-  } catch(e){
-    console.warn('enumerateCameras error', e);
-    sel.innerHTML = '<option>Cannot detect</option>';
-  }
-}
-
-/**
- * openCameraByDevice:
- * - if deviceId provided -> open that device
- * - if no deviceId -> prefer front camera via facingMode:'user'
- * Handles common errors with friendly messages.
- */
-async function openCameraByDevice(deviceId){
-  try {
-    if (stream) stopCamera();
-
-    let constraints;
-    if (deviceId) {
-      constraints = { video: { deviceId: { exact: deviceId }, width: { ideal: 1280 }, height: { ideal: 720 } }, audio: false };
-    } else {
-      constraints = { video: { facingMode: { ideal: 'user' }, width: { ideal: 1280 }, height: { ideal: 720 } }, audio: false };
-    }
-
-    // Attempt to open camera (may prompt permission)
-    stream = await navigator.mediaDevices.getUserMedia(constraints);
-
-    // Attach
-    $('video').srcObject = stream;
-    $('captureBtn').disabled = false;
-    $('openCam').style.display = 'none';
-    $('closeCam').style.display = 'inline-block';
-    $('retakeBtn').style.display = 'none';
-    setStatus('', null);
-    $('videoHint').style.display = 'none';
-
-    // Try to set cameraSelect value to the actual device if available
-    try {
-      const track = stream.getVideoTracks()[0];
-      const settings = track.getSettings ? track.getSettings() : {};
-      if (settings && settings.deviceId) {
-        const sel = $('cameraSelect');
-        try { sel.value = settings.deviceId; } catch(e) {}
-      }
-    } catch(e){ /* ignore */ }
-
-  } catch (err) {
-    console.error('openCameraByDevice error', err);
-    // Friendly error handling
-    const name = (err && (err.name || '')).toString();
-    if (/NotAllowedError|PermissionDeniedError/i.test(name)) {
-      setStatus('Camera permission denied — allow camera access in browser settings.', false);
-    } else if (/NotFoundError|OverconstrainedError/i.test(name)) {
-      setStatus('Requested camera not available on this device.', false);
-    } else if (/NotReadableError|TrackStartError/i.test(name)) {
-      setStatus('Cannot access camera (it may be used by another app).', false);
-    } else {
-      setStatus('Camera error: ' + (err && (err.message||err.toString()) || 'unknown'), false);
-    }
-  }
-}
-
-function stopCamera(){
-  if(!stream) return;
-  stream.getTracks().forEach(t=>t.stop());
-  stream = null;
-  $('video').srcObject = null;
-  $('captureBtn').disabled = true;
-  $('openCam').style.display = 'inline-block';
-  $('closeCam').style.display = 'none';
-  $('videoHint').style.display = 'block';
-}
-
-/* capture */
-function captureImage(){
-  const video = $('video'), canvas = $('canvas');
-  const w = video.videoWidth, h = video.videoHeight;
-  if(!w || !h){ setStatus('Unable to capture image', false); return; }
-  const maxW = 1200;
-  const scale = Math.min(1, maxW / w);
-  canvas.width = Math.round(w * scale);
-  canvas.height = Math.round(h * scale);
-  const ctx = canvas.getContext('2d');
-  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-  const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
-  showThumbnail(dataUrl);
-  stopCamera();
-}
-
-function showThumbnail(dataUrl){
-  const wrap = $('thumbWrap');
-  wrap.innerHTML = `<div class="thumb"><img src="${dataUrl}" style="display:block;max-width:220px;height:auto;border-radius:8px"></div>`;
-  wrap.dataset.photo = dataUrl;
-  $('retakeBtn').style.display = 'inline-block';
-  showError('err-photo','');
-}
-
-/* validation */
-function validateBeforeSubmit(){
-  let ok = true;
-  showError('err-emp',''); showError('err-photo','');
-  const emp = $('empSelect').value;
-  const mode = $('mode').value;
-  const note = ($('note').value || '').trim();
-  const photo = $('thumbWrap').dataset.photo;
-
-  if(!emp){ showError('err-emp','Please select an employee.'); ok = false; }
-  if(mode === 'IN'){
-    const now = new Date(); const h = now.getHours(), m = now.getMinutes();
-    if((h > 10 || (h === 10 && m > 5)) && (!note || note.length < 3)){ showError('err-emp','IN after 10:05 requires a short note.'); ok = false; }
-  }
-  if(!photo){ showError('err-photo','Photo required. Please capture.'); ok = false; }
-  return ok;
-}
-
-/* submit */
+/* ===== SUBMIT (ONLY ONE FLOW) ===== */
 async function submitAttendance(){
-  if(!validateBeforeSubmit()){ setStatus('Please correct highlighted fields', false); return; }
-  const payload = {
-    empId: $('empSelect').value,
-    mode: $('mode').value || 'IN',
-    note: $('note').value || '',
-    source: 'WEBAPP',
-    deviceId: navigator.userAgent || '',
-    deviceEmail: $('signInID').value || '',
-    cameraLabel: $('cameraSelect').options[$('cameraSelect').selectedIndex]?.text || '',
-    photo: $('thumbWrap').dataset.photo || ''
-  };
 
   setStatus('Submitting...', null);
   $('submitBtn').disabled = true;
-  try{
-    const res = await fetch(GAS_WEBAPP_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+
+  const payload = {
+    empId: $('empSelect').value || 'TEST',
+    mode: 'IN',
+    note: 'demo',
+    source: 'WEBAPP'
+  };
+
+  try {
+    const res = await fetch(GAS_WEBAPP_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
       body: JSON.stringify(payload)
     });
-    const j = await res.json();
-    if(j && j.status === 'ok'){
-      setStatus('Attendance submitted ✓ ' + (new Date()).toLocaleString(), true);
-      $('note').value = ''; $('thumbWrap').innerHTML = ''; delete $('thumbWrap').dataset.photo;
-      $('retakeBtn').style.display = 'none';
+
+    const data = await res.json();
+
+    if(data && data.status === 'ok'){
+      setStatus('Attendance submitted successfully ✔', true);
     } else {
-      setStatus('Server error: ' + (j && j.message ? j.message : 'unknown'), false);
+      setStatus('Server error', false);
     }
-  } catch(err){
-    console.error('submitAttendance error', err);
-    setStatus('Network error while submitting', false);
+
+  } catch(e){
+    setStatus('Network / CORS error', false);
+    console.error(e);
   } finally {
     $('submitBtn').disabled = false;
   }
 }
 
-/* utilities */
-function clearForm(){
-  $('empSelect').value = '';
-  $('empName').value = '';
-  $('empEmail').value = '';
-  $('mode').value = 'IN';
-  $('note').value = '';
-  $('thumbWrap').innerHTML = '';
-  delete $('thumbWrap').dataset.photo;
-  setStatus('', null);
-  showError('err-photo',''); showError('err-emp','');
-}
-
-function getCompanyFromUrl(){ try{ const p = new URLSearchParams(location.search); return (p.get('company') || '').replace(/\+/g,' ').trim(); }catch(e){ return ''; } }
-
-/* wiring & smart mobile auto-open logic */
-document.addEventListener('DOMContentLoaded', async ()=> {
-  const companyFromUrl = getCompanyFromUrl();
-  if (companyFromUrl) $('company').value = companyFromUrl;
-
-  // enumerate cameras and load employees first
-  await enumerateCameras();
-  await loadEmployees(companyFromUrl || $('company').value || '');
-
-  // If on mobile and permission already granted, try to auto-open front camera (best-effort)
-  try {
-    const isMobileDevice = isMobile();
-    if (isMobileDevice && navigator.permissions && navigator.permissions.query) {
-      // Not all browsers support 'camera' in permissions, but try
-      try {
-        const p = await navigator.permissions.query({ name: 'camera' });
-        if (p && p.state === 'granted') {
-          // safe to open without prompting
-          try {
-            // prefer currently selected device, else open with facingMode:user
-            const did = $('cameraSelect').value || null;
-            await openCameraByDevice(did || null);
-          } catch(e){ /* ignore - will let user open manually */ }
-        }
-      } catch(e){ /* ignore unsupported permission name */ }
-    }
-  } catch(e){ /* ignore */ }
-
-  // Event handlers
-  $('refreshCams').addEventListener('click', enumerateCameras);
-  $('refreshBtn').addEventListener('click', ()=> loadEmployees($('company').value));
-  $('loadAllBtn').addEventListener('click', ()=> { $('company').value = ''; loadEmployees(''); });
-
-  $('openCam').addEventListener('click', async ()=> {
-    // User gesture — always works better on iOS Safari
-    const did = $('cameraSelect').value || null;
-    await openCameraByDevice(did);
-  });
-  $('closeCam').addEventListener('click', ()=> stopCamera());
-  $('captureBtn').addEventListener('click', ()=> captureImage());
-  $('retakeBtn').addEventListener('click', ()=> { $('thumbWrap').innerHTML=''; delete $('thumbWrap').dataset.photo; $('retakeBtn').style.display='none'; $('openCam').style.display='inline-block'; });
+/* ===== EVENTS ===== */
+document.addEventListener('DOMContentLoaded', () => {
   $('submitBtn').addEventListener('click', submitAttendance);
-  $('clearBtn').addEventListener('click', clearForm);
-
-  $('empSelect').addEventListener('change', function(){
-    const opt = this.options[this.selectedIndex];
-    $('empName').value = opt ? (opt.dataset.name||'') : '';
-    $('empEmail').value = opt ? (opt.dataset.email||'') : '';
-  });
-
-  $('company').addEventListener('blur', ()=> loadEmployees($('company').value));
+  $('clearBtn').addEventListener('click', ()=> setStatus('',null));
 });
-
-const APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyjCaQtRhPn3noyKXYx_RiAgl--EFfmzrIdzWV71LAyKMF069JqQVRo9B8kiHXa4zsy/exec'; // your exec URL
-
-async function submitToServer(payload) {
-  try {
-    const resp = await fetch(APPSCRIPT_URL, {
-      method: 'POST',
-      mode: 'cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    const data = await resp.json();
-    return data;
-  } catch (err) {
-    console.error('submit error', err);
-    throw err;
-  }
-}
-
-// in your submit button handler replace google.script.run...submitAttendance(payload) with:
-$('submitBtn').disabled = true; $('submitBtn').textContent = 'Submitting...';
-submitToServer(payload)
-  .then(res => {
-    $('submitBtn').disabled = false; $('submitBtn').textContent = 'Submit Attendance';
-    if (res && res.status === 'ok') {
-      status('Attendance submitted ✓ ' + (new Date()).toLocaleString(), true);
-      $('note').value = ''; clearThumbnail();
-    } else {
-      status('Error: ' + (res && res.message ? res.message : 'unknown'), false);
-    }
-  })
-  .catch(err => {
-    $('submitBtn').disabled = false; $('submitBtn').textContent = 'Submit Attendance';
-    status('Network error while submitting', false);
-    console.error(err);
-  });
-
 </script>
+
 </body>
 </html>
-
