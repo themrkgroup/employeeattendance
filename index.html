@@ -90,13 +90,13 @@
   <div class="wrap">
     <div class="top">
       <div class="brand">
-        <div class="logo">EM</div>
+        <div class="logo">MRK</div>
         <div class="title">
           <h1>Employee Attendance</h1>
-          <p class="muted">Fast • Secure • Mobile-friendly</p>
+          <p class="muted">Fill The Form For sumbit Attendance</p>
         </div>
       </div>
-      <div class="muted">Pro — Light Theme</div>
+      <div class="muted">automatic attandance system</div>
     </div>
 
     <div class="grid">
@@ -107,7 +107,7 @@
         <div style="display:grid;grid-template-columns:1fr 140px;gap:12px;margin-bottom:12px">
           <div>
             <label for="company">Company (optional)</label>
-            <input id="company" type="text" inputmode="text" placeholder="e.g., Organik Things" aria-label="Company">
+            <input id="company" type="text" inputmode="text" placeholder="Company Name" aria-label="Company">
           </div>
           <div style="display:flex;flex-direction:column;gap:8px;justify-content:flex-end">
             <button id="refreshBtn" class="btn-outline" aria-label="Reload employees">Refresh</button>
@@ -134,7 +134,7 @@
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
           <div>
-            <label for="mode">Mode</label>
+            <label for="mode">Mode<span style="color:var(--danger)">*</span></label>
             <select id="mode"><option value="IN">IN</option><option value="OUT">OUT</option></select>
           </div>
           <div>
@@ -193,7 +193,7 @@
 <script>
 /* ========== CONFIG ========== */
 /* Replace with your deployed Apps Script web app /exec URL */
-const GAS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbybRPAd9G4f19o3TcBYbkWQN9rvCAQ4rJgx8hgs-_iWQfrnI545K1qZJ3uhwPG-LAmsVA/exec';
+const GAS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyjCaQtRhPn3noyKXYx_RiAgl--EFfmzrIdzWV71LAyKMF069JqQVRo9B8kiHXa4zsy/exec';
 /* ============================ */
 
 const $ = id => document.getElementById(id);
@@ -532,7 +532,7 @@ document.addEventListener('DOMContentLoaded', async ()=> {
   $('company').addEventListener('blur', ()=> loadEmployees($('company').value));
 });
 
-const APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbybRPAd9G4f19o3TcBYbkWQN9rvCAQ4rJgx8hgs-_iWQfrnI545K1qZJ3uhwPG-LAmsVA/exec'; // your exec URL
+const APPSCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyjCaQtRhPn3noyKXYx_RiAgl--EFfmzrIdzWV71LAyKMF069JqQVRo9B8kiHXa4zsy/exec'; // your exec URL
 
 async function submitToServer(payload) {
   try {
@@ -572,3 +572,4 @@ submitToServer(payload)
 </script>
 </body>
 </html>
+
